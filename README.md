@@ -2,7 +2,7 @@
 
 Install the following packages
 
-  $ sudo zypper install git neofetch neovim helix stow lazygit
+  $ sudo zypper install git neofetch neovim gcc helix stow lazygit
 
 Install the dotfiles:
 
