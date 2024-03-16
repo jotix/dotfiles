@@ -1,7 +1,7 @@
 #!/bin/bash
 
 jtx-stow(){
-  stow  --stow --dir=./dotfiles --target=$HOME --no-folding . $@
+  stow  --stow --dir=. --target=$HOME --no-folding . $@
 }
 
 backup-dotfiles(){
