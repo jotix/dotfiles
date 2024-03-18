@@ -1,8 +1,9 @@
 #!/bin/bash
 #
-sudo apt install git gcc
+sudo apt install git gcc pipx neofetch
 
-sudo snap install go nvim --classic pipx
+sudo snap install go --classic
+sudo snap install nvim --classic
 
 ### powerline-go
 go install github.com/justjanne/powerline-go@latest
