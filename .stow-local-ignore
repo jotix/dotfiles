@@ -1,0 +1,4 @@
+^stow-dotfiles.sh
+\.stow-local-ignore
+\.git
+^README.*
