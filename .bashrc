@@ -124,7 +124,7 @@ alias vi=nvim
 
 ### go 
 export GOPATH=$HOME/go
-export PATH=$PATH:$HOME/go/bin
+export PATH=$PATH:$HOME/go/bin:$HOME/.local/bin
 
 function _update_ps1() {
     PS1="$($GOPATH/bin/powerline-go -error $? -jobs $(jobs -p | wc -l))"
