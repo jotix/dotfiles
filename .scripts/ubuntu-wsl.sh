@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-sudo apt install git gcc pipx neofetch
+sudo apt install git gcc pipx neofetch cmake libvterm-bin libvterm-dev libvterm0
 
 sudo snap install go --classic
 sudo snap install nvim --classic
