@@ -166,21 +166,39 @@
 #+end_src
 ** ivy
 #+begin_src emacs-lisp
-(use-package ivy
-  :config
-  (ivy-mode 1))
+;; (use-package ivy
+;;   :config
+;;   (ivy-mode 1))
 
-(use-package counsel
-  :config
-  (counsel-mode 1)
-  (setq counsel-linux-app-format-function 'counsel-linux-app-format-function-name-only))
+;; (use-package counsel
+;;   :config
+;;   (counsel-mode 1)
+;;   (setq counsel-linux-app-format-function 'counsel-linux-app-format-function-name-only))
 
-(use-package swiper)
+;;(use-package swiper)
 
-(use-package ivy-rich
-  :after ivy
+;; (use-package ivy-rich
+;;   :after ivy
+;;   :config
+;;   (ivy-rich-mode 1))
+#+end_src
+** minibuffer
+#+begin_src emacs-lisp
+(use-package vertico
   :config
-  (ivy-rich-mode 1))
+  (setq vertico-cycle t)
+  (setq vertico-resize nil)
+  (vertico-mode 1))
+
+(use-package marginalia
+  :config
+  (marginalia-mode 1))
+
+(use-package consult)
+
+(use-package orderless
+  :config
+  (setq completion-styles '(orderless basic)))
 #+end_src
 ** dashboard
 #+begin_src emacs-lisp
@@ -585,10 +603,10 @@
 #+end_src
 ** remap default keybindings
 #+begin_src emacs-lisp
-(global-set-key (kbd "C-s") 'swiper)
+(global-set-key (kbd "C-s") 'consult-line)
 (global-set-key (kbd "C-x k") 'kill-current-buffer)
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-(global-set-key (kbd "C-x b") 'counsel-switch-buffer)
+(global-set-key (kbd "C-x b") 'consult-buffer)
 (global-set-key (kbd "C-x d") #'(lambda () (interactive) (dired ".")))
 #+end_src
 * dired

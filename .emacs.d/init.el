@@ -93,7 +93,7 @@
 (defun jtx/set-font-faces ()
   (set-face-attribute 'default nil
 		      :font "Ubuntu Mono"
-		      :height 100
+		      :height 110
 		      :weight 'medium)
 
   (set-face-attribute 'font-lock-comment-face nil
@@ -124,21 +124,37 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-(use-package ivy
-  :config
-  (ivy-mode 1))
+;; (use-package ivy
+;;   :config
+;;   (ivy-mode 1))
 
-(use-package counsel
-  :config
-  (counsel-mode 1)
-  (setq counsel-linux-app-format-function 'counsel-linux-app-format-function-name-only))
+;; (use-package counsel
+;;   :config
+;;   (counsel-mode 1)
+;;   (setq counsel-linux-app-format-function 'counsel-linux-app-format-function-name-only))
 
-(use-package swiper)
+;;(use-package swiper)
 
-(use-package ivy-rich
-  :after ivy
+;; (use-package ivy-rich
+;;   :after ivy
+;;   :config
+;;   (ivy-rich-mode 1))
+
+(use-package vertico
   :config
-  (ivy-rich-mode 1))
+  (setq vertico-cycle t)
+  (setq vertico-resize nil)
+  (vertico-mode 1))
+
+(use-package marginalia
+  :config
+  (marginalia-mode 1))
+
+(use-package consult)
+
+(use-package orderless
+  :config
+  (setq completion-styles '(orderless basic)))
 
 (use-package dashboard
   :config
@@ -450,10 +466,10 @@
 (define-key org-present-mode-keymap (kbd "C-<right>") 'org-present-next)
 (define-key org-present-mode-keymap (kbd "C-<left>") 'org-present-prev)
 
-(global-set-key (kbd "C-s") 'swiper)
+(global-set-key (kbd "C-s") 'consult-line)
 (global-set-key (kbd "C-x k") 'kill-current-buffer)
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-(global-set-key (kbd "C-x b") 'counsel-switch-buffer)
+(global-set-key (kbd "C-x b") 'consult-buffer)
 (global-set-key (kbd "C-x d") #'(lambda () (interactive) (dired ".")))
 
 ;; Make dired open in the same window when using RET or ^
