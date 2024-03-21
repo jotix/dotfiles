@@ -182,7 +182,7 @@
 ;;   :config
 ;;   (ivy-rich-mode 1))
 #+end_src
-** minibuffer
+** minibuffer (vertico, marginalia, consult & orderless)
 #+begin_src emacs-lisp
 (use-package vertico
   :config
