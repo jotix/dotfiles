@@ -4,7 +4,7 @@
 ;; EDIT THE FILE emacs-config.org INSTEAD
 ;;
 
-(setq jtx-emacs-config-file "~/.config/emacs/emacs-config.org")
+(setq jtx-emacs-config-file "~/dotfiles/.emacs.d/emacs-config.org")
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 

@@ -2,7 +2,7 @@
 #+TITLE: JOTIX emacs config.org
 #+DESCRIPTION: jotix's personal emacs config.
 #+STARTUP: overview
-#+PROPERTY: header-args :tangle ./init.el :mkdirp yes
+#+PROPERTY: header-args :tangle ~/dotfiles/.emacs.d/init.el :mkdirp yes
 #+auto_tangle: t
 
 * header
@@ -15,7 +15,7 @@
 #+end_src
 * emacs-config-path
 #+begin_src emacs-lisp
-(setq jtx-emacs-config-file "~/.config/emacs/emacs-config.org")
+(setq jtx-emacs-config-file "~/dotfiles/.emacs.d/emacs-config.org")
 #+end_src
 * qol/editing
 ** yes-or-no
