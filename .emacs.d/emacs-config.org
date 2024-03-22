@@ -200,6 +200,12 @@
   :config
   (setq completion-styles '(orderless basic)))
 #+end_src
+** multiple cursors
+#+begin_src emacs-lisp
+(use-package multiple-cursors
+  :config
+  (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines))
+#+end_src
 ** dashboard
 #+begin_src emacs-lisp
 (use-package dashboard
