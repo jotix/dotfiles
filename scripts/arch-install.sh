@@ -190,13 +190,14 @@ arch-chroot /mnt passwd
 echo -e "\nSET JOTIX PASSWORD\n"
 arch-chroot /mnt useradd -m -G wheel -s /bin/bash jotix
 arch-chroot /mnt passwd jotix
-[[ $HOST == "ffm-arch" ]] && \
-    arch-chroot /mnt useradd -m -s /bin/bash filofem && \
-    echo -e "\nSET FILOFEM PASSWORD\n" && \
+if [[ $HOST == "ffm-arch" ]]; then
+    arch-chroot /mnt useradd -m -s /bin/bash filofem
+    echo -e "\nSET FILOFEM PASSWORD\n"
     arch-chroot /mnt passwd filofem
+fi
 
 ### install & config libvirt
-arch-chroot /mnt yes | pacman -S --noconfirm --ask=4 libvirt iptables-nft dnsmasq dmidecode virt-manager qemu-full
+arch-chroot /mnt pacman -S --noconfirm --ask=4 libvirt iptables-nft dnsmasq dmidecode virt-manager qemu-full
 arch-chroot /mnt usermod -a -G libvirt jotix
 
 ### unmount & reboot
