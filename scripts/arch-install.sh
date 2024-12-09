@@ -143,23 +143,20 @@ echo jtx-arch > /mnt/etc/hostname
 
 ### config the bootloader
 arch-chroot /mnt bootctl install
-echo -e "\
-default  arch.conf
+echo -e "default  arch.conf
 timeout  5
 console-mode max
 editor   no
 " > /mnt/boot/loader/loader.conf
 
-echo -e "\
-title   Arch Linux
+echo -e "title   Arch Linux
 linux   /vmlinuz-linux
 initrd  /amd-ucode.img
 initrd  /initramfs-linux.img
 options root=LABEL=Arch rootflags=subvol=/@ rootfstype=btrfs rw
 " > /mnt/boot/loader/entries/arch.conf
 
-echo -e "\
-title   Arch Linux (fallback initramfs)
+echo -e "title   Arch Linux (fallback initramfs)
 linux   /vmlinuz-linux
 initrd  /amd-ucode.img
 initrd  /initramfs-linux-fallback.img
@@ -187,9 +184,7 @@ arch-chroot /mnt passwd jotix
     echo -e "\nSET FILOFEM PASSWORD\n" && \
     arch-chroot /mnt passwd filofem
 
-### clone arch-config repo
-arch-chroot -u jotix /mnt git clone https://github.com/jotix/arch-config.git /home/jotix/arch-config
-
 ### unmount & reboot
-umount -R /mnt
-reboot
+echo "Installation finished, you can do some final asjustements now or reboot and use the new system:
+> umount -R /mnt
+> reboot"
