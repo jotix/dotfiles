@@ -118,87 +118,13 @@ pacstrap /mnt base linux linux-firmware
 ### generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab
 
-### enable parallel downloads in new installation
-sed -i -e 's/#ParallelDownloads = 5/ParallelDownloads = 10/g' /mnt/etc/pacman.conf
-
-### locale config
-arch-chroot /mnt ln -sf /usr/share/zoneinfo/America/Argentina/Buenos_Aires /etc/localtime
-arch-chroot /mnt hwclock --systohc
-sed -i -e 's/#en_US.UTF-8/en_US.UTF-8/g' /mnt/etc/locale.gen
-sed -i -e 's/#es_AR.UTF-8/es_AR.UTF-8/g' /mnt/etc/locale.gen
-arch-chroot /mnt locale-gen
-echo LANG=en_US.UTF-8 > /mnt/etc/locale.conf
-
-### install packages ##########################################################
-PACKAGES="
-networkmanager ntp
-exfatprogs ntfs-3g dosfstools btrfs-progs
-efibootmgr amd-ucode
-unzip p7zip
-base-devel cmake sudo
-less man-pages man-db
-exa bat fastfetch
-ttf-jetbrains-mono ttf-jetbrains-mono-nerd 
-ttf-ubuntu-font-family ttf-ubuntu-mono-nerd ttf-ubuntu-nerd
-git lazygit openssh go
-neovim emacs firefox
-mesa xf86-video-amdgpu vulkan-radeon
-plasma kde-applications tesseract-data-eng kitty rclone
-cups ghostscript system-config-printer
-"
-arch-chroot /mnt pacman -S --noconfirm --needed $PACKAGES
-
 ### network configuration
-echo jtx-arch > /mnt/etc/hostname
+echo $HOST > /mnt/etc/hostname
 
-### config the bootloader
-arch-chroot /mnt bootctl install
-echo -e "default  arch.conf
-timeout  5
-console-mode max
-editor   no
-" > /mnt/boot/loader/loader.conf
-
-echo -e "title   Arch Linux
-linux   /vmlinuz-linux
-initrd  /amd-ucode.img
-initrd  /initramfs-linux.img
-options root=LABEL=Arch rootflags=subvol=/@ rootfstype=btrfs rw
-" > /mnt/boot/loader/entries/arch.conf
-
-echo -e "title   Arch Linux (fallback initramfs)
-linux   /vmlinuz-linux
-initrd  /amd-ucode.img
-initrd  /initramfs-linux-fallback.img
-options root=LABEL=Arch rootflags=subvol=/@ rootfstype=btrfs rw
-" > /mnt/boot/loader/entries/arch-fallback.conf
-
-### enable services
-arch-chroot /mnt systemctl enable fstrim.timer
-arch-chroot /mnt systemctl enable sddm
-arch-chroot /mnt systemctl enable cups.service
-arch-chroot /mnt systemctl enable NetworkManager
-arch-chroot /mnt systemctl enable ntpdate
-arch-chroot systemctl enable libvirtd.service
-
-### config sudo
-sed -i -e 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/g' /mnt/etc/sudoers
-
-### set the password & users
-echo -e "\nSET ROOT PASSWORD\n"
-arch-chroot /mnt passwd
-echo -e "\nSET JOTIX PASSWORD\n"
-arch-chroot /mnt useradd -m -G wheel -s /bin/bash jotix
-arch-chroot /mnt passwd jotix
-if [[ $HOST == "ffm-arch" ]]; then
-    arch-chroot /mnt useradd -m -s /bin/bash filofem
-    echo -e "\nSET FILOFEM PASSWORD\n"
-    arch-chroot /mnt passwd filofem
-fi
-
-### install & config libvirt
-arch-chroot /mnt pacman -S --noconfirm --ask=4 libvirt iptables-nft dnsmasq dmidecode virt-manager qemu-full
-arch-chroot /mnt usermod -a -G libvirt jotix
+### chroot
+cd
+cp -rv . /mnt/root
+arch-chroot /mnt /root/desktop-install.sh
 
 ### unmount & reboot
 echo "Installation finished, you can do some final asjustements now or reboot and use the new system:
