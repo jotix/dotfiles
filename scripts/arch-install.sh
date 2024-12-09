@@ -144,25 +144,25 @@ echo jtx-arch > /mnt/etc/hostname
 ### config the bootloader
 arch-chroot /mnt bootctl install
 echo -e "\
-default  arch.conf\n
-timeout  5\n
-console-mode max\n
-editor   no\n
+default  arch.conf
+timeout  5
+console-mode max
+editor   no
 " > /mnt/boot/loader/loader.conf
 
 echo -e "\
-title   Arch Linux\n
-linux   /vmlinuz-linux\n
+title   Arch Linux
+linux   /vmlinuz-linux
 initrd  /amd-ucode.img
-initrd  /initramfs-linux.img\n
+initrd  /initramfs-linux.img
 options root=LABEL=Arch rootflags=subvol=/@ rootfstype=btrfs rw
 " > /mnt/boot/loader/entries/arch.conf
 
 echo -e "\
-title   Arch Linux (fallback initramfs)\n
-linux   /vmlinuz-linux\n
+title   Arch Linux (fallback initramfs)
+linux   /vmlinuz-linux
 initrd  /amd-ucode.img
-initrd  /initramfs-linux-fallback.img\n
+initrd  /initramfs-linux-fallback.img
 options root=LABEL=Arch rootflags=subvol=/@ rootfstype=btrfs rw
 " > /mnt/boot/loader/entries/arch-fallback.conf
 
