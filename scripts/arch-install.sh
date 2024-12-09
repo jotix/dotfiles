@@ -142,7 +142,7 @@ ttf-jetbrains-mono nerd-fonts
 git lazygit openssh go
 neovim emacs firefox
 mesa xf86-video-amdgpu vulkan-radeon
-plasma kde-applications kitty rclone
+plasma kde-applications tesseract-data-eng kitty rclone
 cups ghostscript system-config-printer
 "
 arch-chroot /mnt pacman -S $PACKAGES
