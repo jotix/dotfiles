@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DOTFILES_DIR=$(dirname $0)/dotfiles
+DOTFILES_DIR=$PWD/dotfiles
 HOME_DIR=/home/jotix
 BACKUP_DIR=$HOME_DIR/.dotfiles-backup
 
@@ -8,6 +8,7 @@ mkdir -p $BACKUP_DIR
 
 process-file() {
 
+    echo '---'$@
     FILE=$@
     FILE_RELATIVE=$(echo $FILE | sed "s,$DOTFILES_DIR,,g")
     DESTINY=$HOME_DIR$FILE_RELATIVE
