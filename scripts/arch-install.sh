@@ -145,7 +145,7 @@ mesa xf86-video-amdgpu vulkan-radeon
 plasma kde-applications tesseract-data-eng kitty rclone
 cups ghostscript system-config-printer
 "
-arch-chroot /mnt pacman -S $PACKAGES
+arch-chroot /mnt pacman -S --noconfirm --needed $PACKAGES
 
 ### network configuration
 echo jtx-arch > /mnt/etc/hostname
