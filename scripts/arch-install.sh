@@ -138,7 +138,8 @@ unzip p7zip
 base-devel cmake sudo
 less man-pages man-db
 exa bat fastfetch
-ttf-jetbrains-mono nerd-fonts
+ttf-jetbrains-mono ttf-jetbrains-mono-nerd 
+ttf-ubuntu-font-family ttf-ubuntu-mono-nerd ttf-ubuntu-nerd
 git lazygit openssh go
 neovim emacs firefox
 mesa xf86-video-amdgpu vulkan-radeon
