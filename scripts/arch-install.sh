@@ -145,7 +145,6 @@ neovim emacs firefox
 mesa xf86-video-amdgpu vulkan-radeon
 plasma kde-applications tesseract-data-eng kitty rclone
 cups ghostscript system-config-printer
-libvirt iptables-nft dnsmasq dmidecode virt-manager qemu-full
 "
 arch-chroot /mnt pacman -S --noconfirm --needed $PACKAGES
 
@@ -174,9 +173,6 @@ initrd  /initramfs-linux-fallback.img
 options root=LABEL=Arch rootflags=subvol=/@ rootfstype=btrfs rw
 " > /mnt/boot/loader/entries/arch-fallback.conf
 
-### libvirt config
-arch-chroot /mnt usermod -a -G libvirt jotix
-
 ### enable services
 arch-chroot /mnt systemctl enable fstrim.timer
 arch-chroot /mnt systemctl enable sddm
@@ -198,6 +194,10 @@ arch-chroot /mnt passwd jotix
     arch-chroot /mnt useradd -m -s /bin/bash filofem && \
     echo -e "\nSET FILOFEM PASSWORD\n" && \
     arch-chroot /mnt passwd filofem
+
+### install & config libvirt
+arch-chroot /mnt yes | pacman -S --noconfirm --ask=4 libvirt iptables-nft dnsmasq dmidecode virt-manager qemu-full
+arch-chroot /mnt usermod -a -G libvirt jotix
 
 ### unmount & reboot
 echo "Installation finished, you can do some final asjustements now or reboot and use the new system:
