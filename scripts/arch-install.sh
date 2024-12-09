@@ -84,7 +84,6 @@ mkdir -p /mnt/.snapshots
 mkdir -p /mnt/var/log
 mkdir -p /mnt/var/cache
 mkdir -p /mnt/var/tmp
-mkdir -p /mnt/mnt/jtx-ssd
 mkdir -p /mnt/mnt/root-partition
 
 # mount ESP part
@@ -97,8 +96,16 @@ mount LABEL=Arch /mnt/var/log -osubvol=@log
 mount LABEL=Arch /mnt/var/cache -osubvol=@cache
 mount LABEL=Arch /mnt/var/tmp -osubvol=@tmp
 mount LABEL=Arch /mnt/mnt/root-partition -osubvol=/
-mount LABEL=jtx-ssd /mnt/mnt/jtx-ssd -osubvol=/
-[[ HOST == "jtx-arch" ]] && mkdir -p /mnt/mnt/jtx-nvme && mount LABEL=jtx-nvme /mnt/mnt/jtx-nvme -osubvol=/
+
+if [[ ! -b "/dev/disk/by-label/jtx-ssd" ]]; then
+  mkdir -p /mnt/mnt/jtx-ssd
+  mount LABEL=jtx-ssd /mnt/mnt/jtx-ssd -osubvol=/
+fi
+
+if [[ ! -b "/dev/disk/by-label/jtx-nvme" ]]; then
+  mkdir -p /mnt/mnt/jtx-nvme 
+  mount LABEL=jtx-nvme /mnt/mnt/jtx-nvme -osubvol=/
+fi
 
 ### enable parallel downloads
 sed -i -e 's/#ParallelDownloads = 5/ParallelDownloads = 10/g' /etc/pacman.conf
