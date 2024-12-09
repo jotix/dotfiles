@@ -35,8 +35,8 @@ if [[ $CONTINUE != "YES" ]]; then
 fi
 
 echo
-echo "Installing NixOS in $DISK"
-echo "Flake: $HOST"
+echo "Installing Arch Linux in $DISK"
+echo "Hostname: $HOST"
 echo
 
 if [[ $HOSTNAME == "ffm-arch" ]] || [[ $HOSTNAME == "jtx-arch" ]]; then
@@ -99,12 +99,12 @@ mount LABEL=Arch /mnt/var/cache -osubvol=@cache
 mount LABEL=Arch /mnt/var/tmp -osubvol=@tmp
 mount LABEL=Arch /mnt/mnt/root-partition -osubvol=/
 
-if [[ ! -b "/dev/disk/by-label/jtx-ssd" ]]; then
+if [[ -b "/dev/disk/by-label/jtx-ssd" ]]; then
   mkdir -p /mnt/mnt/jtx-ssd
   mount LABEL=jtx-ssd /mnt/mnt/jtx-ssd -osubvol=/
 fi
 
-if [[ ! -b "/dev/disk/by-label/jtx-nvme" ]]; then
+if [[ -b "/dev/disk/by-label/jtx-nvme" ]]; then
   mkdir -p /mnt/mnt/jtx-nvme 
   mount LABEL=jtx-nvme /mnt/mnt/jtx-nvme -osubvol=/
 fi
