@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 echo
 lsblk -o +LABEL
 echo 
@@ -143,7 +145,7 @@ mesa xf86-video-amdgpu vulkan-radeon
 plasma kde-applications kitty rclone
 cups ghostscript system-config-printer
 "
-arch-chroot /mnt pacman -S --needed --noconfirm $PACKAGES
+arch-chroot /mnt pacman -S $PACKAGES
 
 ### network configuration
 echo jtx-arch > /mnt/etc/hostname
